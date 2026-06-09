@@ -28,8 +28,6 @@ Open **http://localhost:3015**
 
 For production setup, see **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**.
 
-**Supabase SQL:** use **`/setup`** on your deployed site (or locally) — one-click **Copy SQL** buttons for schema, seed, and admin user scripts.
-
 ---
 
 ## Project layout
