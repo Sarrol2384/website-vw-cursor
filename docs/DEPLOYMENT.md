@@ -7,7 +7,7 @@ Deploy the agency website to **Supabase** (database + auth) and **Vercel** (host
 ## 1. Supabase project
 
 1. Create a project at [supabase.com](https://supabase.com).
-2. Open **SQL Editor** and run migrations in order:
+2. Open **SQL Editor** and run migrations in order (or use the copy buttons at **`/setup`** on your deployed site):
    - [`supabase/migrations/001_schema.sql`](../supabase/migrations/001_schema.sql)
    - [`supabase/migrations/002_seed.sql`](../supabase/migrations/002_seed.sql)
 3. In **Authentication → Users**, create your admin user (email + password).

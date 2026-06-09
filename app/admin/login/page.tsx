@@ -58,13 +58,20 @@ function AdminLoginForm() {
         <CardContent>
           {error === "supabase_not_configured" && (
             <p className="mb-4 rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-              Supabase is not configured. Copy .env.local.example to .env.local
-              and set your keys.
+              Supabase is not configured. Set env vars on Vercel, or see{" "}
+              <Link href="/setup" className="underline">
+                /setup
+              </Link>{" "}
+              to run database migrations.
             </p>
           )}
           {error === "not_admin" && (
             <p className="mb-4 rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-              Your account is not in admin_users. Add your user ID in Supabase.
+              Your account is not in admin_users.{" "}
+              <Link href="/setup#admin_user" className="underline">
+                Copy the admin SQL
+              </Link>{" "}
+              and run it in Supabase.
             </p>
           )}
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -93,8 +100,12 @@ function AdminLoginForm() {
             </Button>
           </form>
           <p className="mt-4 text-center text-xs text-muted-foreground">
+            <Link href="/setup" className="hover:text-foreground">
+              Database setup (copy SQL)
+            </Link>
+            {" · "}
             <Link href="/" className="hover:text-foreground">
-              ← Back to site
+              Back to site
             </Link>
           </p>
         </CardContent>
