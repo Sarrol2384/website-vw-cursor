@@ -25,10 +25,27 @@ function required(name: string, value: string | undefined): string {
 }
 
 export function isSupabaseConfigured(): boolean {
-  return Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  );
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim();
+  if (!url || !anon) return false;
+
+  // Ignore template placeholders from .env.local.example
+  if (
+    url.includes("your-project") ||
+    anon.startsWith("your-") ||
+    anon === "your-anon-key"
+  ) {
+    return false;
+  }
+
+  try {
+    const parsed = new URL(url);
+    return (
+      parsed.protocol === "https:" && parsed.hostname.endsWith(".supabase.co")
+    );
+  } catch {
+    return false;
+  }
 }
 
 export const supabaseUrl = () => {

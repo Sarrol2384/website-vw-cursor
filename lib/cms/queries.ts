@@ -18,32 +18,44 @@ import {
   fallbackSettings,
 } from "./fallback";
 
+async function withSupabaseFallback<T>(
+  fallback: T,
+  query: () => Promise<T>,
+): Promise<T> {
+  if (!isSupabaseConfigured()) return fallback;
+  try {
+    return await query();
+  } catch (error) {
+    console.error("Supabase query failed, using fallback content:", error);
+    return fallback;
+  }
+}
+
 export async function getSiteSettings(): Promise<SiteSettings> {
-  if (!isSupabaseConfigured()) return fallbackSettings;
-
-  const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
-    .from("site_settings")
-    .select("*")
-    .limit(1)
-    .maybeSingle();
-
-  return data ?? fallbackSettings;
+  return withSupabaseFallback(fallbackSettings, async () => {
+    const supabase = await createSupabaseServerClient();
+    const { data, error } = await supabase
+      .from("site_settings")
+      .select("*")
+      .limit(1)
+      .maybeSingle();
+    if (error) throw error;
+    return data ?? fallbackSettings;
+  });
 }
 
 export async function getPublishedProjects(): Promise<ProjectWithImages[]> {
-  if (!isSupabaseConfigured()) {
-    return fallbackProjects.filter((p) => p.published);
-  }
-
-  const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
-    .from("projects")
-    .select("*, project_images(*)")
-    .eq("published", true)
-    .order("sort_order", { ascending: true });
-
-  return (data as ProjectWithImages[]) ?? fallbackProjects;
+  const fallback = fallbackProjects.filter((p) => p.published);
+  return withSupabaseFallback(fallback, async () => {
+    const supabase = await createSupabaseServerClient();
+    const { data, error } = await supabase
+      .from("projects")
+      .select("*, project_images(*)")
+      .eq("published", true)
+      .order("sort_order", { ascending: true });
+    if (error) throw error;
+    return (data as ProjectWithImages[]) ?? fallback;
+  });
 }
 
 export async function getFeaturedProjects(): Promise<ProjectWithImages[]> {
@@ -54,97 +66,88 @@ export async function getFeaturedProjects(): Promise<ProjectWithImages[]> {
 export async function getProjectBySlug(
   slug: string,
 ): Promise<ProjectWithImages | null> {
-  if (!isSupabaseConfigured()) {
-    return fallbackProjects.find((p) => p.slug === slug && p.published) ?? null;
-  }
-
-  const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
-    .from("projects")
-    .select("*, project_images(*)")
-    .eq("slug", slug)
-    .eq("published", true)
-    .maybeSingle();
-
-  return data as ProjectWithImages | null;
+  const fallback =
+    fallbackProjects.find((p) => p.slug === slug && p.published) ?? null;
+  return withSupabaseFallback(fallback, async () => {
+    const supabase = await createSupabaseServerClient();
+    const { data, error } = await supabase
+      .from("projects")
+      .select("*, project_images(*)")
+      .eq("slug", slug)
+      .eq("published", true)
+      .maybeSingle();
+    if (error) throw error;
+    return data as ProjectWithImages | null;
+  });
 }
 
 export async function getPublishedServices(): Promise<Service[]> {
-  if (!isSupabaseConfigured()) {
-    return fallbackServices.filter((s) => s.published);
-  }
-
-  const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
-    .from("services")
-    .select("*")
-    .eq("published", true)
-    .order("sort_order", { ascending: true });
-
-  return data ?? fallbackServices;
+  const fallback = fallbackServices.filter((s) => s.published);
+  return withSupabaseFallback(fallback, async () => {
+    const supabase = await createSupabaseServerClient();
+    const { data, error } = await supabase
+      .from("services")
+      .select("*")
+      .eq("published", true)
+      .order("sort_order", { ascending: true });
+    if (error) throw error;
+    return data ?? fallback;
+  });
 }
 
 export async function getPricingPackages(): Promise<PricingPackage[]> {
-  if (!isSupabaseConfigured()) {
-    return fallbackPricing;
-  }
-
-  const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
-    .from("pricing_packages")
-    .select("*")
-    .order("sort_order", { ascending: true });
-
-  return data ?? fallbackPricing;
+  return withSupabaseFallback(fallbackPricing, async () => {
+    const supabase = await createSupabaseServerClient();
+    const { data, error } = await supabase
+      .from("pricing_packages")
+      .select("*")
+      .order("sort_order", { ascending: true });
+    if (error) throw error;
+    return data ?? fallbackPricing;
+  });
 }
 
 export async function getFaqItems(): Promise<FaqItem[]> {
-  if (!isSupabaseConfigured()) {
-    return fallbackFaq;
-  }
-
-  const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
-    .from("faq_items")
-    .select("*")
-    .order("sort_order", { ascending: true });
-
-  return data ?? fallbackFaq;
+  return withSupabaseFallback(fallbackFaq, async () => {
+    const supabase = await createSupabaseServerClient();
+    const { data, error } = await supabase
+      .from("faq_items")
+      .select("*")
+      .order("sort_order", { ascending: true });
+    if (error) throw error;
+    return data ?? fallbackFaq;
+  });
 }
 
 export async function getPublishedBlogPosts(): Promise<BlogPost[]> {
-  if (!isSupabaseConfigured()) {
-    return fallbackBlogPosts.filter((p) => p.status === "published");
-  }
-
-  const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
-    .from("blog_posts")
-    .select("*")
-    .eq("status", "published")
-    .order("published_at", { ascending: false });
-
-  return data ?? fallbackBlogPosts;
+  const fallback = fallbackBlogPosts.filter((p) => p.status === "published");
+  return withSupabaseFallback(fallback, async () => {
+    const supabase = await createSupabaseServerClient();
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("*")
+      .eq("status", "published")
+      .order("published_at", { ascending: false });
+    if (error) throw error;
+    return data ?? fallback;
+  });
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
-  if (!isSupabaseConfigured()) {
-    return (
-      fallbackBlogPosts.find(
-        (p) => p.slug === slug && p.status === "published",
-      ) ?? null
-    );
-  }
-
-  const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
-    .from("blog_posts")
-    .select("*")
-    .eq("slug", slug)
-    .eq("status", "published")
-    .maybeSingle();
-
-  return data;
+  const fallback =
+    fallbackBlogPosts.find((p) => p.slug === slug && p.status === "published") ??
+    null;
+  return withSupabaseFallback(fallback, async () => {
+    const supabase = await createSupabaseServerClient();
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("*")
+      .eq("slug", slug)
+      .eq("status", "published")
+      .maybeSingle();
+    if (error) throw error;
+    return data;
+  });
 }
 
 export async function getAllProjectsAdmin(): Promise<ProjectWithImages[]> {
