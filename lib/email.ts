@@ -86,7 +86,7 @@ export async function sendContactNotification(
 
   console.info(
     "Contact notification sent via Brevo",
-    response.data?.messageId ?? "ok",
+    response.messageId ?? "ok",
     "to:",
     toEmails.join(", "),
     "from:",
