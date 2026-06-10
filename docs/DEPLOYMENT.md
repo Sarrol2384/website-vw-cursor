@@ -84,11 +84,41 @@ Use a **private** repository.
 
 ---
 
-## 6. Custom domain
+## 6. Custom domain (vonwillingh.co.za + www)
 
-1. In Vercel → **Settings → Domains**, add `vonwillingh.co.za`.
-2. Update DNS at your registrar per Vercel instructions.
-3. Update `NEXT_PUBLIC_SITE_URL` to `https://vonwillingh.co.za` and redeploy.
+Use Vercel project **`website-vw-cursor-q9qk`** (the one with env vars). Do not attach domains to the empty `website-vw-cursor` project.
+
+### 6a. Add domains in Vercel
+
+1. Open [Vercel → website-vw-cursor-q9qk → Settings → Domains](https://vercel.com).
+2. Add `vonwillingh.co.za` and `www.vonwillingh.co.za`.
+3. Set **`vonwillingh.co.za`** as the primary domain and redirect `www` to apex (Vercel Domains UI, or via `vercel.json` redirect in this repo).
+
+### 6b. DNS at your registrar
+
+Add these records (confirm exact values in the Vercel Domains UI):
+
+| Host | Type | Value |
+|------|------|-------|
+| `@` (apex) | `A` | `76.76.21.21` |
+| `www` | `CNAME` | `cname.vercel-dns.com` |
+
+Remove any old `A` / `CNAME` records pointing elsewhere (e.g. legacy hosting at `102.206.25.74`). Propagation can take 5–60 minutes (sometimes up to 48 hours for `.co.za`).
+
+### 6c. Environment variable
+
+In Vercel → **Settings → Environment Variables**:
+
+- `NEXT_PUBLIC_SITE_URL` = `https://vonwillingh.co.za`
+
+Redeploy once after saving.
+
+### 6d. Supabase auth URLs
+
+In Supabase → **Authentication → URL Configuration**:
+
+- **Site URL:** `https://vonwillingh.co.za`
+- **Redirect URLs:** `https://vonwillingh.co.za/**` and `https://www.vonwillingh.co.za/**`
 
 ---
 
