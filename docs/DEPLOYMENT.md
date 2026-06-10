@@ -30,7 +30,8 @@ INSERT INTO admin_users (user_id) VALUES ('your-auth-user-uuid');
 
 1. Create an account at [brevo.com](https://www.brevo.com).
 2. Create an API key → `BREVO_API_KEY`
-3. Set `CONTACT_TO_EMAIL=sarrol@vonwillingh.co.za`
+3. In **Senders & Domains**, verify the address you will send from → `BREVO_SENDER_EMAIL` (e.g. `vonwillinghc@gmail.com`)
+4. Set who receives alerts → `CONTACT_TO_EMAIL` (comma-separated for multiple inboxes, e.g. `sarrol@vonwillingh.co.za,vonwillinghc@gmail.com`)
 
 ---
 
@@ -76,7 +77,8 @@ Use a **private** repository.
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key |
 | `NEXT_PUBLIC_SITE_URL` | `https://your-domain.vercel.app` |
 | `BREVO_API_KEY` | Brevo API key |
-| `CONTACT_TO_EMAIL` | sarrol@vonwillingh.co.za |
+| `BREVO_SENDER_EMAIL` | Verified Brevo sender (e.g. `vonwillinghc@gmail.com`) |
+| `CONTACT_TO_EMAIL` | Alert recipient(s), comma-separated |
 
 3. Deploy. Build command: `next build` (default).
 

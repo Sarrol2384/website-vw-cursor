@@ -21,11 +21,28 @@ function getBrevoClient(): BrevoClient | null {
   return cachedClient;
 }
 
+function getRecipientEmails(): string[] {
+  const raw =
+    process.env.CONTACT_TO_EMAIL ?? "sarrol@vonwillingh.co.za,vonwillinghc@gmail.com";
+  return raw
+    .split(",")
+    .map((email) => email.trim())
+    .filter(Boolean);
+}
+
+function getSenderEmail(): string {
+  // Must be a sender verified in your Brevo account (Senders & Domains).
+  return (
+    process.env.BREVO_SENDER_EMAIL?.trim() || "vonwillinghc@gmail.com"
+  );
+}
+
 export async function sendContactNotification(
   payload: ContactEmailPayload,
 ): Promise<void> {
   const client = getBrevoClient();
-  const toEmail = process.env.CONTACT_TO_EMAIL ?? "sarrol@vonwillingh.co.za";
+  const toEmails = getRecipientEmails();
+  const senderEmail = getSenderEmail();
 
   if (!client) {
     console.warn("BREVO_API_KEY not set — skipping contact email notification");
@@ -43,13 +60,38 @@ export async function sendContactNotification(
     <p>${escapeHtml(payload.message).replace(/\n/g, "<br>")}</p>
   `;
 
-  await client.transactionalEmails.sendTransacEmail({
-    sender: { name: "VonWillingh Online", email: toEmail },
-    to: [{ email: toEmail, name: "Sarrol Von Willingh" }],
+  const text = [
+    "New contact form submission — VonWillingh Online",
+    "",
+    `Name: ${payload.name}`,
+    `Email: ${payload.email}`,
+    payload.phone ? `Phone: ${payload.phone}` : "",
+    payload.company ? `Company: ${payload.company}` : "",
+    payload.projectType ? `Project type: ${payload.projectType}` : "",
+    "",
+    "Message:",
+    payload.message,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const response = await client.transactionalEmails.sendTransacEmail({
+    sender: { name: "VonWillingh Online", email: senderEmail },
+    to: toEmails.map((email) => ({ email, name: "Sarrol Von Willingh" })),
     replyTo: { email: payload.email, name: payload.name },
     subject: `New enquiry from ${payload.name}`,
     htmlContent: html,
+    textContent: text,
   });
+
+  console.info(
+    "Contact notification sent via Brevo",
+    response.data?.messageId ?? "ok",
+    "to:",
+    toEmails.join(", "),
+    "from:",
+    senderEmail,
+  );
 }
 
 function escapeHtml(text: string): string {

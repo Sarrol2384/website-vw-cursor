@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageBanner } from "@/components/marketing/PageBanner";
 import { FAQAccordion } from "@/components/marketing/FAQAccordion";
 import { CTABand } from "@/components/marketing/CTABand";
 import { getFaqItems, getSiteSettings } from "@/lib/cms/queries";
@@ -17,15 +18,14 @@ export default async function FAQPage() {
 
   return (
     <>
-      <section className="px-4 py-16">
-        <div className="mx-auto max-w-2xl">
-          <h1 className="text-3xl font-bold">Frequently asked questions</h1>
-          <p className="mt-3 text-muted-foreground">
-            Common questions about how we work, what you get, and what to expect.
-          </p>
-          <div className="mt-10">
-            <FAQAccordion items={faq} />
-          </div>
+      <PageBanner
+        eyebrow="Help centre"
+        title="Frequently asked questions"
+        description="Common questions about how we work, what you get, and what to expect."
+      />
+      <section className="bg-brand-cream px-6 py-16 sm:px-8">
+        <div className="mx-auto max-w-2xl rounded-2xl bg-card p-6 shadow-sm sm:p-8">
+          <FAQAccordion items={faq} />
         </div>
       </section>
       <CTABand settings={settings} />

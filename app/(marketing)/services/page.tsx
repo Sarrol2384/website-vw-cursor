@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { PageBanner } from "@/components/marketing/PageBanner";
 import { ServiceCard } from "@/components/marketing/ServiceCard";
 import { CTABand } from "@/components/marketing/CTABand";
 import { LinkButton } from "@/components/ui/link-button";
@@ -19,22 +19,26 @@ export default async function ServicesPage() {
 
   return (
     <>
-      <section className="px-4 py-16">
+      <PageBanner
+        eyebrow="What we offer"
+        title="Services"
+        description="End-to-end web application development for South African businesses — from first prototype to long-term support."
+      />
+      <section className="bg-brand-cream px-6 py-16 sm:px-8">
         <div className="mx-auto max-w-6xl">
-          <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-3xl font-bold">Services</h1>
-            <p className="mt-3 text-muted-foreground">
-              End-to-end web application development for South African
-              businesses — from first prototype to long-term support.
-            </p>
-          </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, index) => (
+              <ServiceCard
+                key={service.id}
+                service={service}
+                featured={index % 3 === 1}
+              />
             ))}
           </div>
           <div className="mt-12 text-center">
-            <LinkButton href="/contact">Discuss your project</LinkButton>
+            <LinkButton href="/contact" variant="accent" size="lg">
+              Discuss your project
+            </LinkButton>
           </div>
         </div>
       </section>

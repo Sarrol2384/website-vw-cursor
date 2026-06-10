@@ -10,42 +10,44 @@ export function Footer({ settings }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t bg-muted/40">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-4">
+    <footer className="bg-primary text-primary-foreground">
+      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 sm:px-8 md:grid-cols-4">
         <div className="md:col-span-2">
           <Image
-            src="/brand/logo.svg"
+            src="/brand/logo.png"
             alt={settings.site_name}
-            width={160}
-            height={32}
-            className="mb-4 h-8 w-auto"
+            width={56}
+            height={56}
+            className="mb-5 h-14 w-14"
           />
-          <p className="max-w-sm text-sm text-muted-foreground">
+          <p className="max-w-sm text-sm leading-relaxed text-primary-foreground/75">
             {settings.tagline ??
               "Custom web applications for South African businesses"}
           </p>
         </div>
 
         <div>
-          <h3 className="mb-3 text-sm font-semibold">Explore</h3>
-          <ul className="space-y-2 text-sm text-muted-foreground">
+          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary-foreground/60">
+            Explore
+          </h3>
+          <ul className="space-y-2.5 text-sm text-primary-foreground/80">
             <li>
-              <Link href="/projects" className="hover:text-foreground">
+              <Link href="/projects" className="hover:text-primary-foreground">
                 Projects
               </Link>
             </li>
             <li>
-              <Link href="/services" className="hover:text-foreground">
+              <Link href="/services" className="hover:text-primary-foreground">
                 Services
               </Link>
             </li>
             <li>
-              <Link href="/pricing" className="hover:text-foreground">
+              <Link href="/pricing" className="hover:text-primary-foreground">
                 Pricing
               </Link>
             </li>
             <li>
-              <Link href="/blog" className="hover:text-foreground">
+              <Link href="/blog" className="hover:text-primary-foreground">
                 Blog
               </Link>
             </li>
@@ -53,13 +55,15 @@ export function Footer({ settings }: FooterProps) {
         </div>
 
         <div>
-          <h3 className="mb-3 text-sm font-semibold">Contact</h3>
-          <ul className="space-y-2 text-sm text-muted-foreground">
+          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary-foreground/60">
+            Contact
+          </h3>
+          <ul className="space-y-2.5 text-sm text-primary-foreground/80">
             {settings.contact_email && (
               <li>
                 <a
                   href={`mailto:${settings.contact_email}`}
-                  className="hover:text-foreground"
+                  className="hover:text-primary-foreground"
                 >
                   {settings.contact_email}
                 </a>
@@ -69,7 +73,7 @@ export function Footer({ settings }: FooterProps) {
               <li>
                 <a
                   href={`tel:${settings.contact_phone.replace(/\s/g, "")}`}
-                  className="hover:text-foreground"
+                  className="hover:text-primary-foreground"
                 >
                   {settings.contact_phone}
                 </a>
@@ -80,7 +84,7 @@ export function Footer({ settings }: FooterProps) {
         </div>
       </div>
 
-      <div className="border-t py-4 text-center text-xs text-muted-foreground">
+      <div className="border-t border-primary-foreground/10 py-5 text-center text-xs text-primary-foreground/50">
         © {year} {settings.site_name} — Sarrol Von Willingh. All rights
         reserved.
       </div>

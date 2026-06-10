@@ -119,6 +119,17 @@ export async function getFaqItems(): Promise<FaqItem[]> {
   });
 }
 
+function mergePublishedBlogPosts(dbPosts: BlogPost[]): BlogPost[] {
+  const fallback = fallbackBlogPosts.filter((p) => p.status === "published");
+  const dbSlugs = new Set(dbPosts.map((p) => p.slug));
+  const missing = fallback.filter((p) => !dbSlugs.has(p.slug));
+  return [...dbPosts, ...missing].sort(
+    (a, b) =>
+      new Date(b.published_at ?? 0).getTime() -
+      new Date(a.published_at ?? 0).getTime(),
+  );
+}
+
 export async function getPublishedBlogPosts(): Promise<BlogPost[]> {
   const fallback = fallbackBlogPosts.filter((p) => p.status === "published");
   return withSupabaseFallback(fallback, async () => {
@@ -129,7 +140,7 @@ export async function getPublishedBlogPosts(): Promise<BlogPost[]> {
       .eq("status", "published")
       .order("published_at", { ascending: false });
     if (error) throw error;
-    return data ?? fallback;
+    return mergePublishedBlogPosts(data ?? []);
   });
 }
 
@@ -146,7 +157,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
       .eq("status", "published")
       .maybeSingle();
     if (error) throw error;
-    return data;
+    return data ?? fallback;
   });
 }
 

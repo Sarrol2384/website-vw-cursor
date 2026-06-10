@@ -1,5 +1,6 @@
 import { Footer } from "@/components/marketing/Footer";
 import { Header } from "@/components/marketing/Header";
+import { TopBar } from "@/components/marketing/TopBar";
 import { getSiteSettings } from "@/lib/cms/queries";
 
 export default async function MarketingLayout({
@@ -11,6 +12,7 @@ export default async function MarketingLayout({
 
   return (
     <>
+      <TopBar settings={settings} />
       <Header />
       <main className="flex-1">{children}</main>
       <Footer settings={settings} />

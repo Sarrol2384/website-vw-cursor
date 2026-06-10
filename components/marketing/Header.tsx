@@ -33,16 +33,19 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 sm:px-8">
+        <Link href="/" className="flex shrink-0 items-center gap-3">
           <Image
-            src="/brand/logo.svg"
-            alt="VonWillingh Online"
-            width={160}
-            height={32}
+            src="/brand/logo.png"
+            alt=""
+            width={80}
+            height={80}
             priority
-            className="h-8 w-auto"
+            className="h-16 w-16 sm:h-20 sm:w-20"
           />
+          <span className="font-heading text-lg leading-tight text-primary sm:text-xl">
+            VonWillingh Online
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
@@ -53,14 +56,14 @@ export function Header() {
               className={cn(
                 "rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted",
                 pathname === link.href
-                  ? "text-primary"
+                  ? "text-accent"
                   : "text-muted-foreground",
               )}
             >
               {link.label}
             </Link>
           ))}
-          <LinkButton href="/contact" size="sm" className="ml-2">
+          <LinkButton href="/contact" size="sm" variant="accent" className="ml-2">
             Get a quote
           </LinkButton>
         </nav>
@@ -88,7 +91,7 @@ export function Header() {
                   className={cn(
                     "rounded-md px-3 py-2.5 text-sm font-medium",
                     pathname === link.href
-                      ? "bg-muted text-primary"
+                      ? "bg-accent/10 text-accent"
                       : "text-foreground",
                   )}
                 >
@@ -97,6 +100,7 @@ export function Header() {
               ))}
               <LinkButton
                 href="/contact"
+                variant="accent"
                 className="mt-4"
                 onClick={() => setOpen(false)}
               >

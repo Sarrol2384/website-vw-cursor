@@ -21,21 +21,38 @@ export function PricingCard({ pkg }: PricingCardProps) {
   return (
     <Card
       className={cn(
-        "flex h-full flex-col",
-        pkg.recommended && "border-primary shadow-md ring-1 ring-primary/20",
+        "flex h-full flex-col rounded-2xl border-0 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg",
+        pkg.recommended &&
+          "bg-accent text-accent-foreground shadow-lg shadow-accent/25 ring-2 ring-accent",
       )}
     >
       <CardHeader>
         {pkg.recommended && (
-          <Badge className="w-fit">Recommended</Badge>
+          <Badge className="w-fit bg-white/20 text-white hover:bg-white/20">
+            Recommended
+          </Badge>
         )}
-        <CardTitle>{pkg.name}</CardTitle>
+        <CardTitle className={pkg.recommended ? "text-white" : ""}>
+          {pkg.name}
+        </CardTitle>
         <CardDescription>
-          <span className="text-2xl font-bold text-foreground">
+          <span
+            className={cn(
+              "text-2xl font-bold",
+              pkg.recommended ? "text-white" : "text-foreground",
+            )}
+          >
             from {formatZar(pkg.price_from_zar)}
           </span>
           {pkg.price_note && (
-            <span className="mt-1 block text-sm">{pkg.price_note}</span>
+            <span
+              className={cn(
+                "mt-1 block text-sm",
+                pkg.recommended ? "text-white/80" : "",
+              )}
+            >
+              {pkg.price_note}
+            </span>
           )}
         </CardDescription>
       </CardHeader>
@@ -43,7 +60,12 @@ export function PricingCard({ pkg }: PricingCardProps) {
         <ul className="space-y-2">
           {pkg.features.map((feature) => (
             <li key={feature} className="flex gap-2 text-sm">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+              <Check
+                className={cn(
+                  "mt-0.5 h-4 w-4 shrink-0",
+                  pkg.recommended ? "text-white" : "text-accent",
+                )}
+              />
               <span>{feature}</span>
             </li>
           ))}
@@ -53,7 +75,7 @@ export function PricingCard({ pkg }: PricingCardProps) {
         <LinkButton
           href="/contact"
           className="w-full"
-          variant={pkg.recommended ? "default" : "outline"}
+          variant={pkg.recommended ? "secondary" : "accent"}
         >
           Request a quote
         </LinkButton>

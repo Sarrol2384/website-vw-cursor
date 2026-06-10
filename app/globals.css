@@ -48,23 +48,27 @@
   --radius-4xl: calc(var(--radius) * 2.6);
   --color-whatsapp: var(--whatsapp);
   --color-whatsapp-foreground: var(--whatsapp-foreground);
+  --color-brand-cream: var(--brand-cream);
+  --color-brand-peach: var(--brand-peach);
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(0.995 0.003 90);
+  --foreground: oklch(0.18 0.04 265);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.18 0.04 265);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.32 0.06 250);
-  --primary-foreground: oklch(0.985 0 0);
-  --accent: oklch(0.78 0.1 75);
-  --accent-foreground: oklch(0.25 0.04 250);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --popover-foreground: oklch(0.18 0.04 265);
+  --primary: oklch(0.21 0.05 265);
+  --primary-foreground: oklch(0.99 0 0);
+  --accent: oklch(0.6 0.2 38);
+  --accent-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.95 0.025 55);
+  --secondary-foreground: oklch(0.21 0.05 265);
+  --muted: oklch(0.96 0.012 75);
+  --muted-foreground: oklch(0.48 0.03 265);
+  --brand-cream: oklch(0.97 0.018 75);
+  --brand-peach: oklch(0.94 0.04 55);
   --whatsapp: oklch(0.74 0.18 145);
   --whatsapp-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.577 0.245 27.325);
@@ -130,5 +134,106 @@
   }
   html {
     @apply font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  .font-heading {
+    font-family: var(--font-heading), var(--font-sans);
+  }
+}
+
+@keyframes space-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes space-float {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(-6px, 4px);
+  }
+  66% {
+    transform: translate(4px, -5px);
+  }
+}
+
+@keyframes space-nebula {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes space-shoot {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(-35deg);
+  }
+  5% {
+    opacity: 0.9;
+  }
+  15% {
+    opacity: 0;
+    transform: translate(-120px, 70px) rotate(-35deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-120px, 70px) rotate(-35deg);
+  }
+}
+
+.space-star-twinkle {
+  animation: space-twinkle ease-in-out infinite;
+}
+
+.space-star-float {
+  animation: space-float ease-in-out infinite;
+}
+
+.space-nebula {
+  animation: space-nebula ease-in-out infinite;
+}
+
+.space-nebula-a {
+  animation-duration: 8s;
+}
+
+.space-nebula-b {
+  animation-duration: 11s;
+  animation-delay: 2s;
+}
+
+.space-nebula-c {
+  animation-duration: 14s;
+  animation-delay: 4s;
+}
+
+.space-shooting-star {
+  animation: space-shoot 9s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space-star-twinkle,
+  .space-star-float,
+  .space-nebula,
+  .space-shooting-star {
+    animation: none;
   }
 }

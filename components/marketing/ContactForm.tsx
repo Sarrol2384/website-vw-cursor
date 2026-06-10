@@ -17,6 +17,66 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
+
+const messageTemplates = [
+  {
+    id: "custom-app",
+    label: "Custom web app quote",
+    projectType: "custom-app",
+    message:
+      "I'd like a quote for a custom web application to replace our current spreadsheets or desktop software. Please let me know what information you need to scope the project.",
+  },
+  {
+    id: "digital-card",
+    label: "Digital business card",
+    projectType: "digital-card",
+    message:
+      "I'm interested in a digital business card for my business. Please share pricing and how quickly we can go live.",
+  },
+  {
+    id: "property",
+    label: "Property platform",
+    projectType: "property",
+    message:
+      "We need a property listing or sales platform with lead capture and admin tools. I'd like to discuss scope and pricing.",
+  },
+  {
+    id: "lms",
+    label: "Learning management system",
+    projectType: "lms",
+    message:
+      "We're looking for a learning management system for courses, students, and staff. Please advise on the best approach and timeline.",
+  },
+  {
+    id: "legacy",
+    label: "Replace legacy software",
+    projectType: "custom-app",
+    message:
+      "We still rely on old desktop software or Microsoft Access and need a modern cloud-based replacement. Can we book a discovery call?",
+  },
+  {
+    id: "ai",
+    label: "AI integration",
+    projectType: "ai",
+    message:
+      "I'd like to explore AI features for our business (e.g. automated copy, lead handling, or workflow assistance). What would you recommend?",
+  },
+  {
+    id: "hosting",
+    label: "Hosting & support",
+    projectType: "other",
+    message:
+      "We already have a web app and need reliable hosting, updates, and ongoing support. Please share your care plan options.",
+  },
+  {
+    id: "general",
+    label: "General enquiry",
+    projectType: "other",
+    message:
+      "I'd like to discuss a project for my business. Please contact me to arrange a convenient time to talk.",
+  },
+] as const;
 
 const schema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -34,6 +94,7 @@ type FormData = z.infer<typeof schema>;
 
 export function ContactForm() {
   const [submitting, setSubmitting] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -47,6 +108,14 @@ export function ContactForm() {
   });
 
   const consent = watch("consent");
+  const projectType = watch("projectType");
+  const messageField = register("message");
+
+  function selectTemplate(template: (typeof messageTemplates)[number]) {
+    setSelectedTemplate(template.id);
+    setValue("message", template.message, { shouldValidate: true });
+    setValue("projectType", template.projectType);
+  }
 
   async function onSubmit(data: FormData) {
     setSubmitting(true);
@@ -62,6 +131,7 @@ export function ContactForm() {
       }
       toast.success("Message sent — we'll be in touch soon.");
       reset();
+      setSelectedTemplate(null);
     } catch (err) {
       toast.error(
         err instanceof Error ? err.message : "Something went wrong. Try again.",
@@ -103,7 +173,10 @@ export function ContactForm() {
 
       <div className="space-y-2">
         <Label>Project type</Label>
-        <Select onValueChange={(v) => setValue("projectType", String(v ?? ""))}>
+        <Select
+          value={projectType}
+          onValueChange={(v) => setValue("projectType", String(v ?? ""))}
+        >
           <SelectTrigger>
             <SelectValue placeholder="Select a type" />
           </SelectTrigger>
@@ -118,12 +191,45 @@ export function ContactForm() {
         </Select>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="message">Message *</Label>
-        <Textarea id="message" rows={5} {...register("message")} />
-        {errors.message && (
-          <p className="text-xs text-destructive">{errors.message.message}</p>
-        )}
+      <div className="space-y-3">
+        <div>
+          <Label>What can we help with?</Label>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Pick a starting point below, then edit the message if you like.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {messageTemplates.map((template) => (
+            <button
+              key={template.id}
+              type="button"
+              onClick={() => selectTemplate(template)}
+              className={cn(
+                "rounded-full border px-3 py-1.5 text-left text-sm transition-colors",
+                selectedTemplate === template.id
+                  ? "border-accent bg-accent text-accent-foreground"
+                  : "border-border bg-background hover:border-accent/40 hover:bg-accent/5",
+              )}
+            >
+              {template.label}
+            </button>
+          ))}
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="message">Message *</Label>
+          <Textarea
+            id="message"
+            rows={5}
+            {...messageField}
+            onChange={(e) => {
+              messageField.onChange(e);
+              setSelectedTemplate(null);
+            }}
+          />
+          {errors.message && (
+            <p className="text-xs text-destructive">{errors.message.message}</p>
+          )}
+        </div>
       </div>
 
       <div className="flex items-start gap-2">
@@ -143,7 +249,7 @@ export function ContactForm() {
         <p className="text-xs text-destructive">{errors.consent.message}</p>
       )}
 
-      <Button type="submit" disabled={submitting} className="w-full sm:w-auto">
+      <Button type="submit" variant="accent" disabled={submitting} className="w-full sm:w-auto">
         {submitting ? "Sending…" : "Send message"}
       </Button>
     </form>

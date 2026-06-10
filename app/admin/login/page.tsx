@@ -15,6 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 function AdminLoginForm() {
   const router = useRouter();
@@ -25,8 +26,17 @@ function AdminLoginForm() {
 
   const error = searchParams.get("error");
 
+  const supabaseConfigured = isSupabaseConfigured();
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!supabaseConfigured) {
+      toast.error(
+        "Supabase is not configured. Edit .env.local with your real keys, then restart npm run dev.",
+      );
+      return;
+    }
+
     setLoading(true);
     try {
       const supabase = createSupabaseBrowserClient();
@@ -40,9 +50,15 @@ function AdminLoginForm() {
       router.push(redirectTo);
       router.refresh();
     } catch (err) {
-      toast.error(
-        err instanceof Error ? err.message : "Invalid email or password",
-      );
+      const message =
+        err instanceof Error ? err.message : "Invalid email or password";
+      if (message === "Failed to fetch") {
+        toast.error(
+          "Cannot reach Supabase. Check NEXT_PUBLIC_SUPABASE_URL in .env.local and restart the dev server.",
+        );
+      } else {
+        toast.error(message);
+      }
     } finally {
       setLoading(false);
     }
@@ -56,10 +72,11 @@ function AdminLoginForm() {
           <CardDescription>VonWillingh Online CMS</CardDescription>
         </CardHeader>
         <CardContent>
-          {error === "supabase_not_configured" && (
+          {(error === "supabase_not_configured" || !supabaseConfigured) && (
             <p className="mb-4 rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-              Supabase is not configured. Copy .env.local.example to .env.local
-              and set your keys (or add env vars on Vercel).
+              Supabase is not configured. Open <code className="text-xs">.env.local</code>,
+              replace the placeholder URL and keys with values from Supabase →
+              Project Settings → API, then restart <code className="text-xs">npm run dev</code>.
             </p>
           )}
           {error === "not_admin" && (

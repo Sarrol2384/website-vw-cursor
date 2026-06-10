@@ -13,17 +13,23 @@ export function CTABand({ settings }: CTABandProps) {
   const wa = settings.whatsapp ?? settings.contact_phone?.replace(/\D/g, "");
 
   return (
-    <section className="bg-primary px-4 py-16 text-primary-foreground">
-      <div className="mx-auto max-w-3xl text-center">
-        <h2 className="text-2xl font-bold sm:text-3xl">
+    <section className="relative overflow-hidden bg-primary px-6 py-20 text-primary-foreground sm:px-8">
+      <div className="pointer-events-none absolute -left-20 top-0 h-64 w-64 rounded-full bg-white/5" />
+      <div className="pointer-events-none absolute -bottom-16 -right-16 h-80 w-80 rounded-full bg-accent/10" />
+
+      <div className="relative mx-auto max-w-3xl rounded-2xl border border-primary-foreground/10 bg-primary-foreground/5 p-10 text-center backdrop-blur-sm sm:p-12">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground/60">
+          Let&apos;s work together
+        </p>
+        <h2 className="mt-3 font-heading text-3xl sm:text-4xl">
           Ready to build your next web application?
         </h2>
-        <p className="mt-3 text-primary-foreground/80">
+        <p className="mx-auto mt-4 max-w-xl text-primary-foreground/80">
           Tell us about your business and we&apos;ll propose a clear path from
           idea to go-live.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <LinkButton href="/contact" size="lg" variant="secondary">
+          <LinkButton href="/contact" size="lg" variant="accent">
             Get a free quote
           </LinkButton>
           {wa && (
