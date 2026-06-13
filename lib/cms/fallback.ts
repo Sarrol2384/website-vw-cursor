@@ -12,10 +12,10 @@ const now = new Date().toISOString();
 export const fallbackSettings: SiteSettings = {
   id: "00000000-0000-0000-0000-000000000001",
   site_name: "VonWillingh Online",
-  tagline: "Custom web applications for South African businesses",
-  hero_title: "We build web apps that run your business",
+  tagline: "Websites for local businesses",
+  hero_title: "Your business online — from only R1,999",
   hero_subtitle:
-    "From mortuary registers to property platforms and learning systems — modern, secure, cloud-hosted software built for South African SMEs.",
+    "Professional starter websites for South African SMEs — hand-built with Next.js and Vercel, not WordPress. Normal price R4,999; intro offer R1,999 once-off.",
   contact_email: "sarrol@vonwillingh.co.za",
   contact_phone: "081 216 3629",
   whatsapp: "27812163629",

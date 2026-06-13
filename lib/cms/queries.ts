@@ -18,13 +18,23 @@ import {
   fallbackSettings,
 } from "./fallback";
 
+const SUPABASE_QUERY_TIMEOUT_MS = 5000;
+
 async function withSupabaseFallback<T>(
   fallback: T,
   query: () => Promise<T>,
 ): Promise<T> {
   if (!isSupabaseConfigured()) return fallback;
   try {
-    return await query();
+    return await Promise.race([
+      query(),
+      new Promise<never>((_, reject) => {
+        setTimeout(
+          () => reject(new Error("Supabase query timed out")),
+          SUPABASE_QUERY_TIMEOUT_MS,
+        );
+      }),
+    ]);
   } catch (error) {
     console.error("Supabase query failed, using fallback content:", error);
     return fallback;

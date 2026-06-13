@@ -1,5 +1,5 @@
 import { ArrowRight, Search, Hammer, Rocket, HeadphonesIcon } from "lucide-react";
-import { HeroVisual } from "@/components/marketing/HeroVisual";
+import { HeroOffer } from "@/components/marketing/HeroOffer";
 import { ProjectCard } from "@/components/marketing/ProjectCard";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { ServiceCard } from "@/components/marketing/ServiceCard";
@@ -56,26 +56,47 @@ export default async function HomePage() {
         <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <span className="mb-4 inline-block rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-accent">
-              {settings.tagline}
+              Websites for local businesses
             </span>
             <h1 className="font-heading text-4xl leading-tight tracking-tight sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
-              {settings.hero_title ?? "We build web apps that run your business"}
+              Your business online — from only{" "}
+              <span className="text-accent">R1,999</span>
             </h1>
+
+            <div className="mt-4 flex flex-wrap items-baseline gap-3">
+              <span className="text-lg text-muted-foreground line-through decoration-2">
+                Normal price R4,999
+              </span>
+              <span className="rounded-md bg-accent/15 px-2.5 py-1 text-sm font-semibold text-accent">
+                Save R3,000 — intro offer
+              </span>
+            </div>
+
             <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              {settings.hero_subtitle}
+              A professional, mobile-friendly website for your salon, shop, clinic,
+              or trades business — built with modern tech, not WordPress templates
+              or drag-and-drop page builders. Fast on Vercel, secure HTTPS, and
+              ready to win local customers on Google.
             </p>
+
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+              We also build full custom web apps when you outgrow a brochure site.
+              This offer is for a quality starter website with your branding,
+              contact details, and lead capture.
+            </p>
+
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <LinkButton href="/contact" size="lg" variant="accent">
-                Get a quote
+                Claim the R1,999 offer
                 <ArrowRight className="ml-2 h-4 w-4" />
               </LinkButton>
               <LinkButton href="/projects" size="lg" variant="outline">
-                View our work
+                See our work
               </LinkButton>
             </div>
           </div>
 
-          <HeroVisual />
+          <HeroOffer />
         </div>
       </section>
 

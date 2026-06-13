@@ -11,12 +11,13 @@ export function TopBar({ settings }: TopBarProps) {
     <div className="hidden border-b border-primary-foreground/10 bg-primary text-sm text-primary-foreground sm:block">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-2.5 sm:px-8">
         <p className="text-primary-foreground/80">
-          Ready to modernise your business software?{" "}
+          Starter websites for local businesses from{" "}
+          <span className="font-semibold text-accent">R1,999</span> —{" "}
           <Link
             href="/contact"
             className="font-semibold text-accent hover:underline"
           >
-            Contact us today
+            claim your intro offer
           </Link>
         </p>
         <div className="flex shrink-0 items-center gap-5 text-primary-foreground/75">
