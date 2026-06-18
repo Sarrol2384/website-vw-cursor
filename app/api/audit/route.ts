@@ -7,7 +7,6 @@ import {
 } from "@/lib/email";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
-import type { AuditResult } from "@/lib/audit/types";
 
 const schema = z.object({
   name: z.string().min(2),
@@ -34,42 +33,47 @@ export async function POST(request: Request) {
     }
 
     const result = computeAuditResult(data.answers);
-    let submissionId: string | null = null;
+    let submissionId = crypto.randomUUID();
+    let savedToDatabase = false;
 
     if (isSupabaseConfigured()) {
-      const supabase = createSupabaseServiceClient();
-      const { data: row, error } = await supabase
-        .from("audit_submissions")
-        .insert([
-          {
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            business_name: data.businessName,
-            score: result.score,
-            tier: result.tier,
-            answers: data.answers,
-            results: result as unknown as Record<string, unknown>,
-            utm_source: data.utmSource ?? null,
-            utm_medium: data.utmMedium ?? null,
-            utm_campaign: data.utmCampaign ?? null,
-            consent: true,
-          },
-        ])
-        .select("id")
-        .single();
+      try {
+        const supabase = createSupabaseServiceClient();
+        const { data: rows, error } = await supabase
+          .from("audit_submissions")
+          .insert([
+            {
+              name: data.name,
+              email: data.email,
+              phone: data.phone,
+              business_name: data.businessName,
+              score: result.score,
+              tier: result.tier,
+              answers: data.answers,
+              results: result as unknown as Record<string, unknown>,
+              utm_source: data.utmSource ?? null,
+              utm_medium: data.utmMedium ?? null,
+              utm_campaign: data.utmCampaign ?? null,
+              consent: true,
+            },
+          ])
+          .select("id");
 
-      if (error) {
-        console.error("Audit insert error:", error);
-        return NextResponse.json(
-          { error: "Failed to save submission" },
-          { status: 500 },
-        );
+        if (error) {
+          console.error("Audit insert error:", error.message, error.code, error.details);
+        } else if (rows?.[0]?.id) {
+          submissionId = rows[0].id;
+          savedToDatabase = true;
+        }
+      } catch (dbErr) {
+        console.error("Audit database error:", dbErr);
       }
+    }
 
-      submissionId = row.id;
-    } else {
-      submissionId = crypto.randomUUID();
+    if (!savedToDatabase) {
+      console.warn(
+        "Audit submission not saved to database — continuing with email delivery.",
+      );
     }
 
     const emailPayload = {
@@ -88,7 +92,12 @@ export async function POST(request: Request) {
       sendAuditNotification(emailPayload),
     ]);
 
-    return NextResponse.json({ ok: true, id: submissionId, result });
+    return NextResponse.json({
+      ok: true,
+      id: submissionId,
+      result,
+      savedToDatabase,
+    });
   } catch (err) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
