@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ExternalLink } from "lucide-react";
@@ -71,6 +72,19 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           <h1 className="mt-4 text-3xl font-bold">{project.title}</h1>
           {project.client && (
             <p className="mt-2 text-muted-foreground">{project.client}</p>
+          )}
+
+          {project.cover_url && (
+            <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden rounded-2xl border shadow-md">
+              <Image
+                src={project.cover_url}
+                alt={project.title}
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
+            </div>
           )}
 
           {project.demo_url && (

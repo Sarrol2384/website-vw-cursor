@@ -1,0 +1,109 @@
+VonWillingh Online — WhatsApp Business setup
+============================================
+
+IMAGES (upload in this order)
+-----------------------------
+
+1. Profile picture
+   File: public/whatsapp/profile-picture.png
+   (copy of public/brand/logo.png — circular VW logo)
+   Where: WhatsApp Business → Business tools → Profile → Profile photo
+   Size: square, 640×640 px recommended (displays as a circle)
+
+2. Catalog product images (optional but recommended)
+   Files in public/whatsapp/:
+   - catalog-starter-website.svg
+   - catalog-digital-card.svg
+   - catalog-custom-app.svg
+   - catalog-enterprise.svg
+   - catalog-cover.svg (use as first catalog item or status image)
+
+   Note: WhatsApp catalog accepts JPG/PNG. Open each SVG in a browser,
+   screenshot or export to PNG at 1024×1024 before uploading.
+   Where: Business tools → Catalog → Add new item → Add image
+
+BUSINESS PROFILE FIELDS
+-----------------------
+
+Business name:
+  VonWillingh Online
+
+Category (pick closest match):
+  Software company
+  (alternatives: Web designer, Internet company, Computer company)
+
+Description (512 character max):
+  Custom web applications for South African businesses — websites, dashboards, LMS, digital cards & more. We replace spreadsheets and old desktop software with modern cloud apps your staff can use anywhere. Hand-built with Next.js, hosted securely. Intro starter websites from R1,999. Message us for a free quote.
+
+Address:
+  177 Magdouw Street, Russel's Rest, Eerste River, 7100
+
+Website:
+  https://vonwillingh.co.za
+
+Email:
+  sarrol@vonwillingh.co.za
+
+Phone:
+  081 216 3629
+
+Business hours (suggested):
+  Mon–Fri  08:00 – 17:00
+  Sat      09:00 – 13:00
+  Sun      Closed
+
+CATALOG ITEMS (copy-paste)
+--------------------------
+
+Item 1 — Starter Website
+  Price: R1,999
+  Description: Professional starter website for SA SMEs. Hand-built with Next.js — not WordPress. Mobile-friendly, fast, and deployed on your domain. Intro offer (normal price R4,999).
+  Link: https://vonwillingh.co.za/pricing
+  Image: catalog-starter-website
+
+Item 2 — Digital Business Card
+  Price: R3,500
+  Description: Mobile link-in-bio page with WhatsApp, contact & social links. Includes admin dashboard so you can update content yourself. Live in 1–2 weeks.
+  Link: https://vonwillingh.co.za/pricing
+  Image: catalog-digital-card
+
+Item 3 — Custom Web App
+  Price: R32,000
+  Description: Custom business web app with staff login, dashboards & daily workflows. Replaces legacy desktop software. Includes deployment, training & 30 days priority fixes. Care plan from R1,200/mo.
+  Link: https://vonwillingh.co.za/contact
+  Image: catalog-custom-app
+
+Item 4 — Enterprise Platform
+  Price: R55,000
+  Description: Multi-module platforms — LMS, CRM, reporting, AI integrations & data migration. Scoped per project with phased payment milestones.
+  Link: https://vonwillingh.co.za/contact
+  Image: catalog-enterprise
+
+GREETING MESSAGE (suggested)
+----------------------------
+
+Hi! Thanks for messaging VonWillingh Online 👋
+
+We build custom websites and web apps for South African businesses.
+
+Reply with:
+1 — Starter website (from R1,999)
+2 — Digital business card (from R3,500)
+3 — Custom web app quote
+4 — Speak to Sarrol
+
+Or visit vonwillingh.co.za
+
+AWAY MESSAGE (suggested)
+------------------------
+
+Thanks for your message! We're currently outside business hours (Mon–Fri 8am–5pm, Sat 9am–1pm). We'll reply as soon as we're back.
+
+QUICK REPLIES (suggested)
+-------------------------
+
+/starter — Starter website info (R1,999 intro offer)
+/pricing — View our packages
+/portfolio — See recent projects
+/quote — Request a custom quote
+/hours — Our business hours

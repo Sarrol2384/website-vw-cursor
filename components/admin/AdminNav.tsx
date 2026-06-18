@@ -11,6 +11,7 @@ import {
   LogOut,
   Newspaper,
   Settings,
+  Sparkles,
   Tag,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,6 +27,7 @@ const links = [
   { href: "/admin/faq", label: "FAQ", icon: HelpCircle },
   { href: "/admin/blog", label: "Blog", icon: Newspaper },
   { href: "/admin/leads", label: "Leads", icon: Inbox },
+  { href: "/admin/audit-leads", label: "AI Audit", icon: Sparkles },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 

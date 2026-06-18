@@ -34,71 +34,127 @@ export const fallbackSettings: SiteSettings = {
 
 export const fallbackProjects: ProjectWithImages[] = [
   {
-    id: "p1",
-    slug: "sweet-victory-mortuary-register",
-    title: "Sweet Victory Mortuary Register",
-    client: "Sweet Victory Funeral Services",
-    category: "Business Systems",
-    industry: "Funeral Services",
+    id: "p-k1",
+    slug: "k1-solutions",
+    title: "K1 Solutions",
+    client: "K1 Solutions",
+    category: "Business Websites",
+    industry: "Professional Services",
     summary:
-      "Cloud-based mortuary register replacing legacy MORFUS / Microsoft Access — staff workflows from intake to book-out and reports.",
-    body: "A full vertical system for daily mortuary operations: capture deceased records, fridge register, book-out, paid status, movements, reports, and permission letters — all from a browser on any device.",
+      "Modern business website for a South African solutions company — services, credibility, and lead capture built with Next.js, not WordPress.",
+    body: "A clean, fast marketing site that positions K1 Solutions as a trusted local partner — mobile-friendly pages, contact enquiries, and professional branding hosted on Vercel with HTTPS.",
     problem:
-      "Sweet Victory relied on a legacy Microsoft Access mortuary system (MORFUS) that required local installs, Access licences, and was difficult to maintain.",
+      "K1 Solutions needed a credible online presence that reflected quality work and made it easy for prospects to get in touch.",
     solution:
-      "A modern Next.js web application with Supabase authentication, PostgreSQL database, and Vercel hosting — giving staff secure access from PC, tablet, or phone.",
+      "A hand-coded Next.js website with responsive layout, fast Vercel hosting, and a POPIA-aware contact flow — no template clutter or plugin bloat.",
     outcome:
-      "Complete replacement for day-to-day mortuary work with dashboard KPIs, searchable register, audit trails, and print-ready permission letters.",
-    stack: ["Next.js", "TypeScript", "Supabase", "Prisma", "Tailwind", "Vercel"],
+      "A professional web presence that supports new business enquiries and matches the quality of their services.",
+    stack: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
     features: [
-      "Dashboard with KPI cards",
-      "Mortuary register with search and filters",
-      "Capture and edit deceased records",
-      "Book-out and paid status",
-      "Reports and permission letters",
-      "Staff login and settings",
+      "Mobile-first responsive design",
+      "Services and about pages",
+      "Contact form with email alerts",
+      "Fast HTTPS hosting on Vercel",
+      "Easy content updates",
     ],
     demo_url: null,
-    cover_url: null,
+    cover_url: "/projects/k1-solutions-cover.png",
     featured: true,
     sort_order: 1,
     published: true,
     created_at: now,
     updated_at: now,
-    project_images: [],
+    project_images: [
+      {
+        id: "pi-k1-1",
+        project_id: "p-k1",
+        url: "/projects/k1-solutions-cover.png",
+        alt: "K1 Solutions website on laptop",
+        sort_order: 0,
+      },
+    ],
   },
   {
-    id: "p2",
-    slug: "eyethu-property-sales-marketing",
-    title: "Eyethu Property Sales & Marketing",
-    client: "Eyethu Property Group",
-    category: "Property Tech",
-    industry: "Real Estate",
+    id: "p-barber",
+    slug: "vonwillingh-barbershop",
+    title: "VonWillingh Barbershop",
+    client: "VonWillingh Barbershop",
+    category: "Local Business",
+    industry: "Barber & Grooming",
     summary:
-      "AI-powered property listing and lead generation platform with bond calculator, POPIA consent, and agent portal.",
-    body: "Public property grid with per-listing landing pages, AI-generated copy via Claude, lead capture, admin dashboard, and agent portal for Cape Town real estate.",
+      "Mobile-first barbershop website with services, gallery, and one-tap WhatsApp booking — built for local walk-in and appointment clients.",
+    body: "A sharp, modern site for a neighbourhood barbershop: showcase cuts and pricing, share location and hours, and let customers message or book via WhatsApp from any phone.",
     problem:
-      "Eyethu needed a modern way to market affordable homes in the Western Cape and capture leads with POPIA-compliant consent.",
+      "The barbershop relied on word of mouth and social DMs — no single link to share services, prices, and location professionally.",
     solution:
-      "A full marketing platform with AI content generation, bond calculator (SA prime, FLISP), Brevo email integration, and role-based admin and agent portals.",
+      "A lightweight Next.js site with service listings, photo gallery, Google Maps link, and prominent WhatsApp CTA — fast on mobile data.",
     outcome:
-      "Live property marketing site with automated lead notifications and agent self-service for listing management.",
-    stack: ["Next.js", "Supabase", "Claude AI", "Brevo", "Tailwind", "Vercel"],
+      "One shareable URL for the shop — customers see services and contact the barber in seconds.",
+    stack: ["Next.js", "Tailwind", "Vercel"],
     features: [
-      "Property listings and landing pages",
-      "AI-generated marketing copy",
-      "Bond calculator",
-      "Lead capture with POPIA consent",
-      "Admin and agent dashboards",
+      "Service menu and pricing",
+      "Photo gallery",
+      "WhatsApp and call buttons",
+      "Opening hours and location",
+      "Mobile-optimised layout",
     ],
-    demo_url: "https://eyethu-sales-marketing.vercel.app",
-    cover_url: null,
+    demo_url: null,
+    cover_url: "/projects/vonwillingh-barbershop-cover.png",
     featured: true,
     sort_order: 2,
     published: true,
     created_at: now,
     updated_at: now,
-    project_images: [],
+    project_images: [
+      {
+        id: "pi-barber-1",
+        project_id: "p-barber",
+        url: "/projects/vonwillingh-barbershop-cover.png",
+        alt: "VonWillingh Barbershop website on mobile and desktop",
+        sort_order: 0,
+      },
+    ],
+  },
+  {
+    id: "p-connies",
+    slug: "connies-travel",
+    title: "Connie's Travel & Tours",
+    client: "Connie's Travel & Tours",
+    category: "Travel & Tourism",
+    industry: "Cruise & Holidays",
+    summary:
+      "Vacation and cruise booking website for South African travellers — MSC Opera packages, cabin pricing, and trip details for the Durban to Cape Town route.",
+    body: "A full travel marketing site promoting Connie's packaged cruise experiences: hero trip promotion, detailed itinerary, cabin price tiers, contact and booking CTAs, and a polished brand for South African holidaymakers.",
+    problem:
+      "Connie needed a professional site to market cruise packages and capture enquiries without juggling scattered WhatsApp messages and PDF brochures.",
+    solution:
+      "A Next.js travel site with trip landing pages, pricing tables, contact forms, and mobile-friendly layout — live on their own subdomain with fast Vercel hosting.",
+    outcome:
+      "Live site promoting the March 2026 MSC Opera cruise with clear pricing paths and booking calls-to-action.",
+    stack: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
+    features: [
+      "Trip details and itinerary pages",
+      "Cabin pricing overview",
+      "Contact and booking CTAs",
+      "Mobile-first travel layout",
+      "Brand-led hero sections",
+    ],
+    demo_url: "https://conniestravel.vonwillingh.co.za",
+    cover_url: "/projects/connies-travel-cover.png",
+    featured: true,
+    sort_order: 3,
+    published: true,
+    created_at: now,
+    updated_at: now,
+    project_images: [
+      {
+        id: "pi-connies-1",
+        project_id: "p-connies",
+        url: "/projects/connies-travel-cover.png",
+        alt: "Connie's Travel cruise website",
+        sort_order: 0,
+      },
+    ],
   },
   {
     id: "p3",
@@ -125,113 +181,23 @@ export const fallbackProjects: ProjectWithImages[] = [
       "PDF certificate generation",
       "Public marketing site",
     ],
-    demo_url: null,
-    cover_url: null,
+    demo_url:
+      "https://pbk-lms-cursor-git-main-sarrol2384s-projects.vercel.app",
+    cover_url: "/projects/pbk-lms-cover.png",
     featured: true,
-    sort_order: 3,
-    published: true,
-    created_at: now,
-    updated_at: now,
-    project_images: [],
-  },
-  {
-    id: "p4",
-    slug: "digital-business-cards",
-    title: "Digital Business Cards",
-    client: "Eyethu, KrisKa Solutions, VonWillingh Barbershop",
-    category: "Digital Cards",
-    industry: "Multi-industry",
-    summary:
-      "Mobile-first link-in-bio digital business cards with admin dashboard — a repeatable product for agents and small businesses.",
-    body: "A productized digital card platform: one URL per person or business with contact links, services, gallery, and password-protected admin to update content without code.",
-    problem:
-      "Agents and small businesses needed a professional mobile presence without building a full website from scratch.",
-    solution:
-      "A templated Next.js digital card with Supabase-backed multi-agent support, image pipeline, and VonWillingh Online footer credit.",
-    outcome:
-      "Deployed for multiple clients with fast turnaround — each card live on its own URL within days.",
-    stack: ["Next.js", "Supabase", "Tailwind", "Vercel"],
-    features: [
-      "Mobile-first link-in-bio layout",
-      "Contact, WhatsApp, and social links",
-      "Services and gallery sections",
-      "Admin content management",
-      "Multi-agent scaffold",
-    ],
-    demo_url: "https://eyethu-digital-card.vercel.app/nomonde-blandile",
-    cover_url: null,
-    featured: false,
     sort_order: 4,
     published: true,
     created_at: now,
     updated_at: now,
-    project_images: [],
-  },
-  {
-    id: "p5",
-    slug: "propreport",
-    title: "PropReport",
-    client: "Eyethu Property Group",
-    category: "Property Tech",
-    industry: "Real Estate",
-    summary:
-      "Real estate performance reporting SaaS with commission splits, PDF reports, WhatsApp summaries, and Stripe billing.",
-    body: "PropReport helps property agencies track performance, generate commission split reports, export PDFs, and send WhatsApp summaries to stakeholders.",
-    problem:
-      "Manual commission tracking and report generation was time-consuming and error-prone for property agencies.",
-    solution:
-      "A dedicated reporting SaaS with Claude-assisted insights, PDF generation, WhatsApp integration, and Stripe subscription billing.",
-    outcome:
-      "Automated performance reporting branded as PropReport by VonWillingh Online.",
-    stack: ["Next.js", "Supabase", "Claude AI", "Stripe", "Brevo", "Tailwind"],
-    features: [
-      "Commission split tracking",
-      "PDF report generation",
-      "WhatsApp summary delivery",
-      "Stripe subscription billing",
-      "Agency dashboard",
+    project_images: [
+      {
+        id: "pi-pbk-1",
+        project_id: "p3",
+        url: "/projects/pbk-lms-cover.png",
+        alt: "PBK Learning Management System website",
+        sort_order: 0,
+      },
     ],
-    demo_url: null,
-    cover_url: null,
-    featured: false,
-    sort_order: 5,
-    published: true,
-    created_at: now,
-    updated_at: now,
-    project_images: [],
-  },
-  {
-    id: "p6",
-    slug: "eyethu-property-crm",
-    title: "Eyethu Property CRM",
-    client: "Eyethu Property Group",
-    category: "Property Tech",
-    industry: "Real Estate",
-    summary:
-      "Transaction CRM for real estate mandates with buyer/seller portals and super-admin reporting.",
-    body: "A property transaction management system covering mandates, buyer and seller portals, super-admin dashboard, and performance reports.",
-    problem:
-      "Eyethu needed a central system to manage property transactions beyond marketing and listings.",
-    solution:
-      "A full CRM built on Next.js and Supabase with role-based portals, mandate tracking, and integrated reporting.",
-    outcome:
-      "Demonstrates depth of client partnership — marketing, cards, CRM, and reporting under one agency relationship.",
-    stack: ["Next.js", "Supabase", "shadcn/ui", "TanStack Query", "Recharts"],
-    features: [
-      "Mandate management",
-      "Buyer and seller portals",
-      "Super-admin dashboard",
-      "Transaction reports",
-      "Role-based access",
-    ],
-    demo_url: null,
-    cover_url: null,
-    featured: false,
-    sort_order: 6,
-    published: true,
-    created_at: now,
-    updated_at: now,
-    project_images: [],
   },
 ];
 
@@ -438,7 +404,7 @@ Paper mortuary registers and old desktop systems (like legacy MORFUS setups) cre
 - **Staff logins** — each user sees only what they are allowed to access
 - **Audit trail** — who changed what, and when
 
-*Example: [Sweet Victory Mortuary Register](/projects/sweet-victory-mortuary-register) — a full cloud replacement for day-to-day mortuary work.*
+*Example: [Connie's Travel & Tours](/projects/connies-travel) — a cruise package site live for South African travellers.*
 
 ---
 
@@ -454,7 +420,7 @@ Agents juggle listings across WhatsApp, email, and spreadsheets. Leads get misse
 - **Agent portals** — teams update stock without calling the office
 - **AI-assisted descriptions** — faster, consistent marketing copy (where you choose to use it)
 
-*Example: [Eyethu Property Sales & Marketing](/projects/eyethu-property-sales-marketing).*
+*Example: [K1 Solutions](/projects/k1-solutions) — a professional business website built with Next.js.*
 
 ---
 

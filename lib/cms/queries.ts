@@ -2,6 +2,7 @@ import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type {
   BlogPost,
+  AuditSubmission,
   ContactSubmission,
   FaqItem,
   PricingPackage,
@@ -239,6 +240,18 @@ export async function getContactSubmissionsAdmin(): Promise<
   const supabase = await createSupabaseServerClient();
   const { data } = await supabase
     .from("contact_submissions")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  return data ?? [];
+}
+
+export async function getAuditSubmissionsAdmin(): Promise<AuditSubmission[]> {
+  if (!isSupabaseConfigured()) return [];
+
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("audit_submissions")
     .select("*")
     .order("created_at", { ascending: false });
 

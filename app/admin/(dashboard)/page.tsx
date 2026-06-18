@@ -1,5 +1,6 @@
 import {
   getAllBlogPostsAdmin,
+  getAuditSubmissionsAdmin,
   getContactSubmissionsAdmin,
   getAllProjectsAdmin,
 } from "@/lib/cms/queries";
@@ -7,10 +8,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LinkButton } from "@/components/ui/link-button";
 
 export default async function AdminDashboardPage() {
-  const [projects, posts, leads] = await Promise.all([
+  const [projects, posts, leads, auditLeads] = await Promise.all([
     getAllProjectsAdmin(),
     getAllBlogPostsAdmin(),
     getContactSubmissionsAdmin(),
+    getAuditSubmissionsAdmin(),
   ]);
 
   const draftPosts = posts.filter((p) => p.status !== "published");
@@ -22,7 +24,7 @@ export default async function AdminDashboardPage() {
         Manage your VonWillingh Online website content.
       </p>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -52,12 +54,25 @@ export default async function AdminDashboardPage() {
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Leads
+              Contact leads
             </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-bold">{leads.length}</p>
             <LinkButton href="/admin/leads" variant="link" className="mt-2 h-auto p-0">
+              View →
+            </LinkButton>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              AI Audit leads
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-2xl font-bold">{auditLeads.length}</p>
+            <LinkButton href="/admin/audit-leads" variant="link" className="mt-2 h-auto p-0">
               View →
             </LinkButton>
           </CardContent>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -32,6 +33,17 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
           featured ? "bg-accent" : "bg-accent/80",
         )}
       />
+      {project.cover_url && (
+        <div className="relative aspect-[16/10] w-full overflow-hidden">
+          <Image
+            src={project.cover_url}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </div>
+      )}
       <CardHeader>
         <div className="mb-2 flex flex-wrap gap-2">
           {project.category && (

@@ -1,0 +1,75 @@
+VonWillingh Online — Facebook Page setup
+=========================================
+
+IMAGES
+------
+
+1. Profile picture
+   File: public/facebook/profile-picture.svg
+   (or reuse public/whatsapp/profile-picture.png)
+   Where: Create Page → Profile picture, or Page settings → Profile picture
+   Size: square, 512×512 px minimum (displays as a circle)
+   Export: open SVG in browser → save as PNG at 512×512 or 1024×1024
+
+2. Cover photo
+   File: public/facebook/cover-photo.svg
+   Where: Create Page → Cover photo, or Page settings → Cover photo
+   Size: 820×312 px display (upload 1640×624 px for sharpness)
+   Export: open SVG in browser → save as PNG at 1640×624
+   Note: profile picture overlaps the bottom-left — text is placed to the right
+
+CREATE PAGE (fields on first screen)
+------------------------------------
+
+Page name:
+  VonWillingh Online
+
+Category (required — pick one):
+  Software company
+  (alternatives: Web designer, Internet company, Computer company)
+
+Bio (optional — short, professional):
+  Custom web applications for South African businesses. Websites, dashboards, LMS & digital cards — hand-built, cloud-hosted, supported long after go-live.
+
+ABOUT SECTION (add after page is created)
+-----------------------------------------
+
+Short description (255 characters):
+  VonWillingh Online builds custom web applications for South African SMEs — replacing spreadsheets and legacy desktop software with modern, secure, cloud-hosted apps. Starter websites from R1,999.
+
+Long description / About:
+  VonWillingh Online is a South African web development studio founded by Sarrol Von Willingh. We design and build custom websites and business web applications for local SMEs — from funeral services and property agencies to education institutes and professional services.
+
+  Every project is shaped around real daily workflows: staff logins, dashboards, registers, and reporting — not generic templates. We build with Next.js and TypeScript, host securely on modern cloud infrastructure, and provide hands-on support long after go-live.
+
+  Services include starter business websites, digital business cards, custom web apps, and enterprise platforms (LMS, CRM, reporting). Introductory starter websites are available from R1,999 once-off.
+
+  Visit vonwillingh.co.za or message us for a free quote.
+
+Contact details:
+  Website:   https://vonwillingh.co.za
+  Email:     sarrol@vonwillingh.co.za
+  Phone:     081 216 3629
+  WhatsApp:  081 216 3629
+  Address:   177 Magdouw Street, Russel's Rest, Eerste River, 7100
+
+Business hours:
+  Mon–Fri  08:00 – 17:00
+  Sat      09:00 – 13:00
+  Sun      Closed
+
+ACTION BUTTON (recommended)
+-------------------------
+
+  Contact us  →  https://vonwillingh.co.za/contact
+  (or "Send message" if you connect Messenger)
+
+FIRST POST (suggested — professional launch)
+--------------------------------------------
+
+  VonWillingh Online is now on Facebook.
+
+  We build custom websites and web applications for South African businesses — modern, secure, and designed around how your team actually works.
+
+  Starter websites from R1,999 · Custom apps from quote
+  vonwillingh.co.za

@@ -321,6 +321,56 @@ export interface Database {
           created_at?: string;
         };
       };
+      audit_submissions: {
+        Row: {
+          id: string;
+          name: string;
+          email: string;
+          phone: string | null;
+          business_name: string | null;
+          score: number;
+          tier: string;
+          answers: Record<string, unknown>;
+          results: Record<string, unknown>;
+          utm_source: string | null;
+          utm_medium: string | null;
+          utm_campaign: string | null;
+          consent: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          email: string;
+          phone?: string | null;
+          business_name?: string | null;
+          score: number;
+          tier: string;
+          answers: Record<string, unknown>;
+          results: Record<string, unknown>;
+          utm_source?: string | null;
+          utm_medium?: string | null;
+          utm_campaign?: string | null;
+          consent?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          email?: string;
+          phone?: string | null;
+          business_name?: string | null;
+          score?: number;
+          tier?: string;
+          answers?: Record<string, unknown>;
+          results?: Record<string, unknown>;
+          utm_source?: string | null;
+          utm_medium?: string | null;
+          utm_campaign?: string | null;
+          consent?: boolean;
+          created_at?: string;
+        };
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
@@ -339,5 +389,7 @@ export type FaqItem = Database["public"]["Tables"]["faq_items"]["Row"];
 export type BlogPost = Database["public"]["Tables"]["blog_posts"]["Row"];
 export type ContactSubmission =
   Database["public"]["Tables"]["contact_submissions"]["Row"];
+export type AuditSubmission =
+  Database["public"]["Tables"]["audit_submissions"]["Row"];
 
 export type ProjectWithImages = Project & { project_images: ProjectImage[] };

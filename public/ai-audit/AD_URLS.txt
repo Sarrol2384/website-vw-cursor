@@ -1,0 +1,24 @@
+AI Audit — Ad campaign URLs
+============================
+
+Use these URLs in Facebook, LinkedIn, Google Ads, and WhatsApp groups.
+UTM parameters are captured automatically and stored with each lead.
+
+Production base:
+https://vonwillingh.co.za/ai-audit
+
+Campaign examples:
+
+Facebook paid:
+https://vonwillingh.co.za/ai-audit?utm_source=facebook&utm_medium=paid&utm_campaign=ai-audit-cpt
+
+LinkedIn:
+https://vonwillingh.co.za/ai-audit?utm_source=linkedin&utm_medium=paid&utm_campaign=ai-audit-cpt
+
+Google Ads:
+https://vonwillingh.co.za/ai-audit?utm_source=google&utm_medium=cpc&utm_campaign=ai-audit-cpt
+
+WhatsApp groups:
+https://vonwillingh.co.za/ai-audit?utm_source=whatsapp&utm_medium=organic&utm_campaign=ai-audit-cpt
+
+View leads and UTM data in the admin: /admin/audit-leads
